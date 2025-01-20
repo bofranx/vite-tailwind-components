@@ -1,10 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import Form from "./components/Form"
+import FormInput from "./components/FormInput"
+import Placeholder from "./components/Placeholder"
+
+const queryClient = new QueryClient()
 
 function App() {
 
   return (
-    <>
-      <div className="text-2xl container text-center mx-auto my-4">test main</div>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Placeholder />
+    </QueryClientProvider>
   )
 }
 
