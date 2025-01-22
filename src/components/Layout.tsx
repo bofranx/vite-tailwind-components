@@ -1,3 +1,6 @@
+import ContentArea from "./ContentArea";
+import Header from "./Header";
+
 export default function Layout() {
 
   const contentArray = [
@@ -23,15 +26,19 @@ export default function Layout() {
   ];
 
   return (
-    <div className="flex flex-row h-screen overflow-hidden">
+    <div className="flex flex-row h-screen overflow-hidden ">
+      {/* Sidebar */}
       <div className="w-[300px] bg-gray-100 border shadow-xl"></div>
-      <div className="flex-1 flex flex-col overflow-scroll prose ">
-        <h1 className=" pl-10 py-4">Page title</h1>
-        <div className="flex-1 bg-purple-200 prose">
+
+
+      {/* Content section */}
+      <div className="flex-1 flex flex-col overflow-scroll  ">
+        <Header>Devices</Header>
+        <ContentArea>
           {contentArray.map((item, index) => (
-            <p className="p-10 " key={index}>{item}</p>
+            <p className="px-10 py-4" key={index}>{item}</p>
           ))}
-        </div>
+        </ContentArea>
 
       </div>
 
