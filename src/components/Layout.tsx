@@ -1,29 +1,38 @@
+import Select from "react-select";
 import ContentArea from "./ContentArea";
 import Header from "./Header";
+import AsyncSelect from "react-select/async";
+import Tabs from "./Tabs";
+
+
+interface OptionType {
+  value: string,
+  label: string
+}
 
 export default function Layout() {
 
-  const contentArray = [
-    "This is a scrollable div.",
-    "Keep adding more content...",
-    "And more content...",
-    "Until it needs to scroll vertically.",
-    "Voilà! You have a scrollable div.",
-    "More and more content...",
-    "Even more content...",
-    "Still adding content...",
-    "Yet more content...",
-    "Content keeps coming...",
-    "This is a lot of content!",
-    "Scrolling is happening now...",
-    "Content to make sure we scroll...",
-    "And another content item...",
-    "Here is some more content...",
-    "Keep scrolling, there's more...",
-    "Almost there...",
-    "Just a few more items...",
-    "And finally, the last piece of content!"
-  ];
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'chocolate2', label: 'Chocolate2' },
+    { value: 'chocolate3', label: 'Chocolate3' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+  const filterOptions = (inputValue: string) => {
+    return options.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
+  const promiseOptions = (inputValue: string) =>
+    new Promise<OptionType[]>((resolve) => {
+      setTimeout(() => {
+        resolve(filterOptions(inputValue));
+      }, 1000);
+    });
+
 
   return (
     <div className="flex flex-row h-screen overflow-hidden ">
@@ -35,9 +44,11 @@ export default function Layout() {
       <div className="flex-1 flex flex-col overflow-scroll  ">
         <Header>Devices</Header>
         <ContentArea>
-          {contentArray.map((item, index) => (
-            <p className="px-10 py-4" key={index}>{item}</p>
-          ))}
+          <Tabs >
+            <div>Content for Tab 1</div>
+            <div>Content for Tab 2</div>
+            <div>Content for Tab 3</div>
+          </Tabs>
         </ContentArea>
 
       </div>
